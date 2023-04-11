@@ -29,9 +29,9 @@ Base64デコーダー実装において、入力データとBase64文字列が`1
 ### Short summary
 
 このチャレンジではreplay attack対策のフィルターや無効化になった暗号化されたパスワードが与えられます。
-replay attack対策のフィルターはBase64文字列を比較する実装であるため、改ざんしたBase64文字列をチャレンジサーバーに与えることでフィルターをバイパスできます。また、有効なパスワードへの変更はBase64 Malleabilityを元に構成されたDecryption Oracleを使用してキーストリームを復号することで行うことができます。
+replay attack対策のフィルターはBase64文字列を比較する実装であるため、改ざんしたBase64文字列をチャレンジサーバーに与えることでフィルターをバイパスできます。また、Base64 Malleabilityを元に構成されたDecryption Oracleを使用してキーストリームを復号することで有効なパスワードへの変更を行い認証をバイパスします。
 
-### Note: Base64デコーダのMalleabilityがアプリケーションに与える影響の可能性について
+### Note: Base64デコーダのMalleabilityがアプリケーションに与える可能性のある影響について
 
 Chatzigiannisらは各言語のBase64デコーダを調査し、ビットレベルで改ざんしたBase64文字列がどのようにデコードされるかを詳しく調査しました\[[CC22][1]{:target="_blank"}\]。
 この論文で報告されているBase64のMalleabilityの有無はデコーダの実装に依存します。
@@ -41,8 +41,8 @@ Chatzigiannisらは各言語のBase64デコーダを調査し、ビットレベ�
 
 - 開発者がバイナリ入力とそのbase64表現との間に一意の対応があると仮定しないこと
 - "malleability-resistant"であるライブラリを使用すること
-- 外部から入力されたBase64文字列はそのまま使用せず、デコードしたあとに再エンコードしてから使用する
-- 恒久的な緩和策は、デコードにおいてパディングビットの検証を行う
+- 外部から入力されたBase64文字列はそのまま使用せず、デコードしたあとに再エンコードしてから使用すること
+- 恒久的な緩和策は、デコードにおいてパディングビットの検証を行うこと
 
 ## 本題: Challengeの技術的な解説
 
@@ -252,15 +252,15 @@ def verify_signature(b64token_signature, verifier, verify_counter):
 ```
 
 `signature` は IV filter bypassと同じようにBase64 Malleabilityでフィルターをバイパスすればよさそうです。
-つまり、`iv`の時のように `signature` の改竄すべき位置を特定し、その1 Byteのみを改竄すれば良いと予想できます。
+つまり、`iv`の時のように `signature` の改ざんすべき位置を特定し、その1 Byteのみを改ざんすれば良いと予想できます。
 
 しかし、 `signature` は CTRモードで暗号化されているので以下の2つの問題をクリアする必要があります。
 
 1. 平文がわからない暗号文をどのように改ざんするか
-2. 署名の改竄すべき位置の特定
-3. どのような変更を加えるべきを探索
+2. 署名の改ざんすべき位置の特定
+3. どのような改ざんを行うべきかを探索
 
-ここで、`1`については`token`と`signature`がCTRモードで暗号化されていることから、Bitflipによって暗号文を改竄することができることがわかります。
+ここで、`1`については`token`と`signature`がCTRモードで暗号化されていることから、Bitflipによって暗号文を改ざんすることができることがわかります。
 しかし`2`と`3`については工夫が必要です。特に `verify_counter` によって認証リクエストは1回のセッションで 2度までしか行うことができず、セッションごとに `token` と `signature` はランダムに生成されるため同一のセッション<sup>*1</sup>では `brute force attack` はできなさそうです。
 
 - (*1) : `3`については複数セッションをまたいでランダムに改ざんすればいつか正解に当たります。
@@ -281,9 +281,9 @@ def verify_signature(b64token_signature, verifier, verify_counter):
 そして、`iv`, `aes_key` は固定されています。Playerは`aes_key` を知ることができません。
 
 `token` のサイズは 15 Bytes、 `signature` のサイズは 64 Bytesであることがわかります。
-Base64でエンコードした場合はもとの長さはは4/3倍になるので、パディングを含めるとBase64Enc( `token || signature` ) のサイズは 108 Bytes です。
+Base64でエンコードした場合はもとの長さは4/3倍になるので、パディングを含めるとBase64Enc( `token || signature` ) のサイズは 108 Bytes です。
 
-では、`2. 署名の改竄すべき位置の特定`について考えます。
+では、`2. 署名の改ざんすべき位置の特定`について考えます。
 改ざんすべき位置は改ざん対象のペイロードの長さからBase64のパディングビット数を計算することで特定できます。
 
 まず、つまり改ざんすべき対象を整理します。
@@ -390,7 +390,7 @@ def gen_exploit_to_bypass_replay_attack_filter_for_sig(iv_hex, modified_encrypte
 # server.py
 acceptable_password = [b"cheeeeese"] # cf. previous password ( PASSWORD_HEX ) was removed
 ```
-つまり、認証トークンを改竄して、暗号化されたパスワードを `cheeeeese` に変更することでpasswordの検証をバイパスできる。
+つまり、認証トークンを改ざんして、暗号化されたパスワードを `cheeeeese` に変更することでpasswordの検証をバイパスできる。
 
 ここで、Base64のDecoding処理に着目してみる。
 
