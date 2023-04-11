@@ -266,7 +266,7 @@ def verify_signature(b64token_signature, verifier, verify_counter):
 ここで、`1`については`token`と`signature`がCTRモードで暗号化されていることから、Bitflipによって暗号文を改ざんすることができることがわかります。
 しかし`2`と`3`については工夫が必要です。特に `verify_counter` によって認証リクエストは1回のセッションで 2度までしか行うことができず、セッションごとに `token` と `signature` はランダムに生成されるため同一のセッション<sup>*1</sup>では `brute force attack` はできなさそうです。
 
-- (*1) : `3`については複数セッションをまたいでランダムに改ざんすればいつか正解に当たります。
+- (*1) : `3`については複数セッションをまたいでランダムに改ざんすればいつか正解に当たります (非想定解)。
 
 #### Finding modification targets
 
