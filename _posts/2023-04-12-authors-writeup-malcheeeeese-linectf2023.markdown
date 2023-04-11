@@ -664,3 +664,18 @@ I then started a survey and found that some malleability issues have been known 
 However, as far as I could find, there was no CTF challenge on that issue (if anyone knows of past challenge, please let me know ).
 So I developed this challenge and waited for the LINE CTF2023, hoping that a similar challenge would not be published in other CTFs. That's really all.
 ```
+
+## 感想
+
+作問アイデアに関しては前の章で書いた通りです。
+作問の方針は[https://github.com/scryptos/docs/blob/master/suggestions-for-running-a-ctf-ja.md](https://github.com/scryptos/docs/blob/master/suggestions-for-running-a-ctf-ja.md)を参考に
+を参考にしました。
+
+全体の感想としては
+今年はCRYPTOカテゴリの問題数が少なく、
+他のカテゴリとのバランスがあまりよくなかったと反省しています。
+
+とはいえ、典型な問題を量産すれば良いというわけでもないと思っています。
+典型な問題を複数出した2022では簡単すぎるという感想を見かけたので。
+
+問題数の確保と難易度の調整はなかなか難しいですが、改善していきたいなと思いました。
