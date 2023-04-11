@@ -13,7 +13,7 @@ LINE CTF 2023でCRYPTOカテゴリから`Malcheeeeese`というチャレンジ�
 
 早速ですが、作問のコンセプトについて説明しようと思います。
 Base64デコーダー実装において、入力データとBase64文字列が`1:1` **ではない** issueがあります。
-このようなはIssueを報告した論文[`Base64 Malleability in Practice` [CC22][1]][1]{:target="_blank"}からインスピレーションを得て作問しました。
+このようなissueを報告した論文[`Base64 Malleability in Practice` [CC22][1]][1]{:target="_blank"}からインスピレーションを得て作問しました。
 より具体的なコンセプトは以下のとおりです。
 
 - Base64 Oracle Attack on CTR mode + Authentication bypass using Base64 Malleability\[[CC22][1]{:target="_blank"}\]
