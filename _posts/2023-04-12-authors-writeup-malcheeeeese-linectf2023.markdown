@@ -648,7 +648,7 @@ FLAG;
 2022年の3月末頃に[Papers update in last 7 days - IACR Cryptology ePrint Archive](https://eprint.iacr.org/days/7){:target="_blank"}からこの\[[CC22][1]{:target="_blank"}\]を読みました。
 
 この論文を初めて読んだときに、Encode-then-EncryptとDecryption Oracleの仮定の下でチャレンジを構成できそうだと直感的に感じました。
-その後調査を開始し、一部のMalleability issueは過去に知られていることがわかりました \[[Valsorda19][2]{:target="_blank"}\]。
+その後調査を開始し、一部のMalleability issueは過去に知られていることがわかりました \[[Valsorda19][2]{:target="_blank"}\]\[[jedisct1 17][3]{:target="_blank"}\]。
 ただし、私が調べた限りではそれを題材にしたCTFのチャレンジはありませんでした ( もし、どなたかご存知でしたら教えて下さい )。
 その後、作問に取り掛かり、他のCTFで同じようなチャレンジが出題されないことを祈りながらLINE CTF2023の開催を待ちました。本当にただそれだけです。
 
@@ -660,7 +660,7 @@ Some players asked me on Discord about how I developed this challenge, so here i
 I found [CC22] (https://eprint.iacr.org/2022/361) paper in https://eprint.iacr.org/days/7 in the end of March 2022.
 
 When I first read this paper, I felt that I could construct a challenge under the assumption of Encode-then-Encrypt and Decryption Oracle.
-I then started a survey and found that some malleability issues have been known in the past [Valsorda19] (https://twitter.com/filosottile/status/1157776085955878913).
+I then started a survey and found that some malleability issues have been known in the past [Valsorda19] (https://twitter.com/filosottile/status/1157776085955878913) [jedisct1 17] (https://twitter.com/jedisct1/status/910158498872381441).
 However, as far as I could find, there was no CTF challenge on that issue (if anyone knows of past challenge, please let me know ).
 So I developed this challenge and waited for the LINE CTF2023, hoping that a similar challenge would not be published in other CTFs. That's really all.
 ```
