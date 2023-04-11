@@ -668,7 +668,7 @@ So I developed this challenge and waited for the LINE CTF2023, hoping that a sim
 ## 感想
 
 作問アイデアに関しては前の章で書いた通りです。
-作問の方針は[https://github.com/scryptos/docs/blob/master/suggestions-for-running-a-ctf-ja.md](https://github.com/scryptos/docs/blob/master/suggestions-for-running-a-ctf-ja.md)を参考に
+作問の方針は[https://github.com/scryptos/docs/blob/master/suggestions-for-running-a-ctf-ja.md](https://github.com/scryptos/docs/blob/master/suggestions-for-running-a-ctf-ja.md){:target="_blank"}
 を参考にしました。
 
 全体の感想としては
