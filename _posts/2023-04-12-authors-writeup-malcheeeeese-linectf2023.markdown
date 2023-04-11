@@ -306,7 +306,7 @@ Base64でエンコードした場合はもとの長さは4/3倍になるので�
 つまり、ここのBase64文字の`Unknown`は `x, y` で決定されます。
 これで、`Unknown`の候補を64通りから `2^2=4` 通りに削減できました。  
 このときの具体的な`x`と`y`の候補はこの4つに絞られます。   
-cf. See Base64 Table [https://en.wikipedia.org/wiki/Base64](https://en.wikipedia.org/wiki/Base64)
+cf. See Base64 Table [https://en.wikipedia.org/wiki/Base64](https://en.wikipedia.org/wiki/Base64){:target="_blank"}
 
 ```
 A ( 000000 ): x=0, y=0
@@ -323,11 +323,14 @@ CTRモードはストリーム暗号のように振る舞うモードである�
 実際の暗号化は
 
 ```
-keysteam = AES-256 (iv || counter , key)
-C = P xor keysteam
+given, Plaintext, Keystream ( Keystream はAES-256へ `(iv || counter)`と `key`を入力して生成 )
+
+then
+Ciphertext := Plaintext xor Keystream
 ```
 
-このように排他的論理和によって暗号化されます。
+このように排他的論理和によって暗号化されます。  
+cf. [https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Counter_(CTR)](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Counter_(CTR)){:target="_blank"}
 つまり、暗号文の任意のビットを反転すると、復号時の平文も反転されます。
 
 #### Modify encrypted signature
