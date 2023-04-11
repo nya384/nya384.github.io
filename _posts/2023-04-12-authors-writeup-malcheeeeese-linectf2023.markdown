@@ -639,7 +639,7 @@ FLAG;
 
 私がどのように作問したかについて Discordで質問を受けましたのでここに書きます。
 
-2022年の3月末頃に(Papers update in last 7 days - IACR Cryptology ePrint Archive)[https://eprint.iacr.org/days/7]{:target="_blank"}からこの\[[CC22][1]{:target="_blank"}\]を読みました。
+2022年の3月末頃に[Papers update in last 7 days - IACR Cryptology ePrint Archive](https://eprint.iacr.org/days/7){:target="_blank"}からこの\[[CC22][1]{:target="_blank"}\]を読みました。
 
 この論文を初めて読んだときに、Encode-then-EncryptとDecryption Oracleの仮定の下でチャレンジを構成できそうだと直感的に感じました。
 その後調査を開始し、一部のMalleability issueは過去に知られていることがわかりました \[[Valsorda19][2]{:target="_blank"}\]。
