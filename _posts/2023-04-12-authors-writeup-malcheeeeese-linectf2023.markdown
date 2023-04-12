@@ -73,7 +73,7 @@ Playerに与えられる情報
 - `AUTHENTICATION_TOKEN = Base64Enc(iv)|| Base64Enc ( AES-256-CTR-Enc( password || token || signature ) )`
 - AUTHENTICATION_TOKEN length : 136 Bytes
 
-しかし、与えられる `AUTHENTICATION_TOKEN` に含まれる `iv` は `replay_attack_filter_for_iv` によって Banded Listに入っています。また、同様に `signature` も `replay_attack_filter_for_sig` によって Banded Listに入っています。加えて、`server.py` を読むとフラグを獲得するためのパスワードが変更されており、`AUTHENTICATION_TOKEN`の前半に埋め込まれた暗号化された未知のパスワードを`cheeeeese`へ改ざんする必要があります。
+しかし、与えられる `AUTHENTICATION_TOKEN` に含まれる `iv` は `replay_attack_filter_for_iv` によって Banned Listに入っています。また、同様に `signature` も `replay_attack_filter_for_sig` によって Banned Listに入っています。加えて、`server.py` を読むとフラグを獲得するためのパスワードが変更されており、`AUTHENTICATION_TOKEN`の前半に埋め込まれた暗号化された未知のパスワードを`cheeeeese`へ改ざんする必要があります。
 
 まとめるとFLAGを得るには以下の3つの障壁をうまく回避する必要があります。
 
